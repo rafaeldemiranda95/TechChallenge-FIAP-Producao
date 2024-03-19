@@ -29,7 +29,7 @@
 
 | Endpoint                                            | Método | Parâmetros                                                                                     |
 | --------------------------------------------------- | ------ | ---------------------------------------------------------------------------------------------- |
-| `localhost:3000/fila-producao`                      | GET    | `{"valor": 50.30,"tipo": "pix","status": "aguardando pagamento","idPedido": 10,"idCliente": 3}`|
+| `localhost:3000/fila-producao`                      | GET    |                                                                                                |
 | `localhost:3000/fila-producao`                      | POST   | `{"id":number,"tempoTotal": number,"status": string,"listaProdutos": [{"name": string,"categoria": string,"descricao": string,"tempoPreparo": number}]}`|
 | `localhost:3000/fila-producao/1`                    | PUT    | `{"status": string}`                                                                           |
 
