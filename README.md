@@ -33,6 +33,13 @@
 | `localhost:3000/fila-producao`                      | POST   | `{"id":number,"tempoTotal": number,"status": string,"listaProdutos": [{"name": string,"categoria": string,"descricao": string,"tempoPreparo": number}]}`|
 | `localhost:3000/fila-producao/{id}`                    | PUT    | `{"status": string}`                                                                           |
 
+## Para rodar a aplicação
+
+```
+docker build -t nome_da_imagem .
+docker run -d -p 8080:80 nome_da_imagem
+```
+
 ## SAGA
 
 ### SAGA Coreografado
