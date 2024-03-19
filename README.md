@@ -31,7 +31,7 @@
 | --------------------------------------------------- | ------ | ---------------------------------------------------------------------------------------------- |
 | `localhost:3000/fila-producao`                      | GET    |                                                                                                |
 | `localhost:3000/fila-producao`                      | POST   | `{"id":number,"tempoTotal": number,"status": string,"listaProdutos": [{"name": string,"categoria": string,"descricao": string,"tempoPreparo": number}]}`|
-| `localhost:3000/fila-producao/1`                    | PUT    | `{"status": string}`                                                                           |
+| `localhost:3000/fila-producao/{id}`                    | PUT    | `{"status": string}`                                                                           |
 
 ## SAGA
 
