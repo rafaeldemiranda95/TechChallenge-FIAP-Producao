@@ -5,16 +5,18 @@ import { PubSub } from '@google-cloud/pubsub';
 import { FilaProducao } from './fila-producao.entity/fila-producao.entity';
 import { CreatePedidoDto } from 'src/pedido/pedido.dto';
 import { EditeFilaProducaoDto } from './fila-producao.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class FilaProducaoService implements OnModuleInit {
   private pubSubClient = new PubSub();
-  private topicName = process.env.TOPIC_STATUS_ATUALIZADO || 'topic-status-atualizado';
-  private subscriptionName = process.env.SUBSCRIPTION_PEDIDO_REALIZADO || 'subscription-pedido-realizado';
+  private topicName =  this.configService.get('TOPIC_STATUS_ATUALIZADO');
+  private subscriptionName =  this.configService.get('SUBSCRIPTION_PEDIDO_REALIZADO');
 
   constructor(
     @InjectRepository(FilaProducao)
     private filaProducaoRepository: Repository<FilaProducao>,
+    private configService: ConfigService,
   ) { }
 
   async onModuleInit() {
