@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { PubSub } from '@google-cloud/pubsub';
 import { FilaProducao } from './fila-producao.entity/fila-producao.entity';
 import { CreatePedidoDto } from 'src/pedido/pedido.dto';
+import { EditeFilaProducaoDto } from './fila-producao.dto';
 
 @Injectable()
 export class FilaProducaoService implements OnModuleInit {
@@ -67,5 +68,14 @@ export class FilaProducaoService implements OnModuleInit {
     } catch (error) {
       console.error(`Erro ao publicar mensagem: ${error.message}`);
     }
+  }
+
+  async findAll(): Promise<FilaProducao[]>{
+    return this.filaProducaoRepository.find()
+  }
+
+  async editeStatusFilaProducao(id: number, editeFilaProducaoTdo: EditeFilaProducaoDto): Promise<FilaProducao>{
+    await this.filaProducaoRepository.update(id, editeFilaProducaoTdo);
+    return this.filaProducaoRepository.findOneBy({ id })
   }
 }

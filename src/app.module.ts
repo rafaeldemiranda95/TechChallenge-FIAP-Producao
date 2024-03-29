@@ -7,19 +7,26 @@ import { PedidoModule } from './pedido/pedido.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Pedido } from './pedido/pedido.entity/pedido.entity';
 import { FilaProducao } from './fila-producao/fila-producao.entity/fila-producao.entity';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: '127.0.0.1',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'producao',
-      autoLoadEntities: true,
-      synchronize: true, // Use apenas em desenvolvimento
-      entities: [FilaProducao, Pedido],
+    ConfigModule.forRoot({
+      isGlobal: true, // Torna o ConfigModule disponível globalmente
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        type: 'mysql', // ou outro banco de dados
+        host: configService.get('DB_HOST'),
+        port: +configService.get('DB_PORT'), // o operador '+' converte a string para número
+        username: configService.get('DB_USERNAME'),
+        password: configService.get('DB_PASSWORD'),
+        database: configService.get('DB_DATABASE'),
+        entities:  [FilaProducao, Pedido],
+        // outras configurações necessárias...
+      }),
     }),
     FilaProducaoModule,
     PedidoModule,
