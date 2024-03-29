@@ -5,13 +5,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Pedido } from './pedido.entity/pedido.entity';
 import { Repository } from 'typeorm';
 import { CreatePedidoDto } from './pedido.dto';
-
 @Injectable()
 export class PedidoService {
   constructor(
     @InjectRepository(Pedido)
     private pedidoRepository: Repository<Pedido>,
-  ) {}
+  ) { }
 
   async salvarPedido(createPedidoDto: CreatePedidoDto): Promise<Pedido> {
     const pedido = this.pedidoRepository.create(createPedidoDto);
