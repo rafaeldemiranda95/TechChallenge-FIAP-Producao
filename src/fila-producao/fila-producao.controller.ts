@@ -7,7 +7,7 @@ import { EditeFilaProducaoDto } from './fila-producao.dto';
 
 @Controller('fila-producao')
 export class FilaProducaoController {
-  constructor(private readonly filaProducaoService: FilaProducaoService) {}
+  constructor(private readonly filaProducaoService: FilaProducaoService) { }
 
   @Get()
   async findAll(): Promise<FilaProducao[]> {
